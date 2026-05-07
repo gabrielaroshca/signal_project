@@ -6,11 +6,22 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.Executors;
 
+/**
+ * Outputs generated patient health data through a TCP server connection.
+ * Connected clients receive streamed health simulation data in real time.
+ */
+
 public class TcpOutputStrategy implements OutputStrategy {
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
+
+    /**
+     * Creates a TCP output strategy using the specified server port.
+     *
+     * @param port the TCP port used for client connections
+     */
 
     public TcpOutputStrategy(int port) {
         try {
@@ -31,6 +42,15 @@ public class TcpOutputStrategy implements OutputStrategy {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Sends generated patient health data to the connected TCP client.
+     *
+     * @param patientId the ID of the patient associated with the data
+     * @param timestamp the timestamp when the data was generated
+     * @param label the category of generated health data
+     * @param data the generated patient data value
+     */
 
     @Override
     public void output(int patientId, long timestamp, String label, String data) {
