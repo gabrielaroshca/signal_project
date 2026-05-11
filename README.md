@@ -67,3 +67,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Project Members
 - Name: Gabriela Rosca 
 - Student ID: 6364363
+
+# UML Models
+
+This project includes UML diagrams for the main parts of the Cardiovascular Health Monitoring System.
+
+The UML files are located in the `uml_models/` folder.
+
+## Included Diagrams
+
+- Generator
+- Output
+- Data 
+- Alert 
+
+The diagrams show how the classes and subsystems in the project are connected and organized.
