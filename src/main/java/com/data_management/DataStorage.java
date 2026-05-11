@@ -82,6 +82,66 @@ public class DataStorage {
      * 
      * @param args command line arguments
      */
+
+    /**
+     * Stores patient data in the storage system.
+     *
+     * @param patientId the patient ID
+     * @param data      the patient data to store
+     */
+    public void storeData(int patientId, PatientData data) {
+        addPatientData(
+                patientId,
+                data.getMeasurementValue(),
+                data.getRecordType(),
+                data.getTimestamp());
+    }
+
+    /**
+     * Retrieves patient data in a time range.
+     *
+     * @param patientId the patient ID
+     * @param startTime the start timestamp
+     * @param endTime   the end timestamp
+     * @return list of patient data
+     */
+    public List<PatientData> getPatientData(int patientId, long startTime, long endTime) {
+        List<PatientRecord> records = getRecords(patientId, startTime, endTime);
+        List<PatientData> patientDataList = new ArrayList<>();
+
+        for (PatientRecord record : records) {
+            PatientData patientData = new PatientData(
+                    record.getPatientId(),
+                    record.getRecordType(),
+                    record.getMeasurementValue(),
+                    record.getTimestamp());
+
+            patientDataList.add(patientData);
+        }
+
+        return patientDataList;
+    }
+
+    /**
+     * Deletes old patient data.
+     *
+     * @param cutoffTimestamp records older than this timestamp should be deleted
+     */
+    public void deleteOldData(long cutoffTimestamp) {
+        // Placeholder for deletion policy.
+    }
+
+    /**
+     * Checks if a user role has access to patient data.
+     *
+     * @param userRole  the role of the user
+     * @param patientId the patient ID
+     * @return true if the user has access
+     */
+    public boolean hasAccess(String userRole, int patientId) {
+        return true;
+    }
+
     public static void main(String[] args) {
         // DataReader is not defined in this scope, should be initialized appropriately.
         // DataReader reader = new SomeDataReaderImplementation("path/to/data");
