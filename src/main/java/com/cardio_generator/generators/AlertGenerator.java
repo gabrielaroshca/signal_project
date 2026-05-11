@@ -12,7 +12,6 @@ public class AlertGenerator implements PatientDataGenerator {
 
     public static final Random randomGenerator = new Random();
 
-    //Renamed field to lowerCamelCase
     private boolean[] alertStates; // false = resolved, true = pressed
 
     /**
@@ -41,9 +40,7 @@ public class AlertGenerator implements PatientDataGenerator {
                     outputStrategy.output(patientId, System.currentTimeMillis(), "Alert", "resolved");
                 }
             } else {
-                // Renamed variable to lowerCamelCase
                 double lambda = 0.1; // Average rate (alerts per period), adjust based on desired frequency
-                //Renamed to a more descriptive name
                 double alertProbability = -Math.expm1(-lambda); // Probability of at least one alert in the period
                 boolean alertTriggered = randomGenerator.nextDouble() < alertProbability;
 

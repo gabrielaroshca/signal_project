@@ -13,10 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FileOutputStrategy implements OutputStrategy {
 
-    //Renamed field to lowerCamelCase
     private String baseDirectory;
 
-    //Renamed field to lowerCamelCase
     public final ConcurrentHashMap<String, String> fileMap = new ConcurrentHashMap<>();
 
     /**
@@ -24,7 +22,6 @@ public class FileOutputStrategy implements OutputStrategy {
      * 
      * @param baseDirectory the directory where output files will be written
      */
-    //Renamed "fileOutputStrategy" to UpperCamelCase
     public FileOutputStrategy(String baseDirectory) {
 
         this.baseDirectory = baseDirectory;
@@ -47,7 +44,6 @@ public class FileOutputStrategy implements OutputStrategy {
             return;
         }
         // Set the filePath variable
-        //Renamed variable to lowerCamelCase
         String filePath = fileMap.computeIfAbsent(label, k -> Paths.get(baseDirectory, label + ".txt").toString());
 
         // Write the data to the file
