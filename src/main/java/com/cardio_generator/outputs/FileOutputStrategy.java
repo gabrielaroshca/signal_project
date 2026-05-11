@@ -32,7 +32,6 @@ public class FileOutputStrategy implements OutputStrategy {
 
     /**
      * Writes generated patient data to a file associated with the data label.
-     * 
      * @param patientId the ID of the patient 
      * @param timestamp the timestamp of the generated data 
      * @param label the category of health data being written
