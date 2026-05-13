@@ -15,10 +15,24 @@ public class WebSocketOutputStrategy implements OutputStrategy {
         server.start();
     }
 
+    /**
+     * Sends formatted patient data to all connected WebSocket clients.
+     *
+     * The format matches the WebSocketDataClient parser:
+     * Patient ID: 1, Timestamp: 1000, Label: ECG, Data: 75.5
+     *
+     * @param patientId the patient ID
+     * @param timestamp the time of the reading
+     * @param label     the type of health data
+     * @param data      the health measurement value
+     */
     @Override
     public void output(int patientId, long timestamp, String label, String data) {
-        String message = String.format("%d,%d,%s,%s", patientId, timestamp, label, data);
-        // Broadcast the message to all connected clients
+
+        String message = "Patient ID: " + patientId + ", Timestamp: " + timestamp + ", Label: " + label + ", Data: "
+                + data;
+
+        // Broadcast the formatted message to all connected clients.
         for (WebSocket conn : server.getConnections()) {
             conn.send(message);
         }

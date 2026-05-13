@@ -18,7 +18,7 @@ public class DataSourceAdapter {
         this.dataStorage = dataStorage;
     }
 
-     /**
+    /**
      * Sends parsed data to storage.
      *
      * @param parsedData the parsed data

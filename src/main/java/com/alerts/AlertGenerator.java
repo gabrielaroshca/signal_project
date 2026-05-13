@@ -43,7 +43,7 @@ public class AlertGenerator {
     /**
      * Creates an AlertGenerator with a custom AlertManager.
      *
-     * @param dataStorage the patient data storage system
+     * @param dataStorage  the patient data storage system
      * @param alertManager the alert manager used to dispatch alerts
      */
     public AlertGenerator(
@@ -69,8 +69,7 @@ public class AlertGenerator {
         boolean lowSystolicDetected = false;
         boolean lowSaturationDetected = false;
 
-        for (PatientRecord record :
-                patient.getRecords(0, Long.MAX_VALUE)) {
+        for (PatientRecord record : patient.getRecords(0, Long.MAX_VALUE)) {
 
             String type = record.getRecordType();
             double value = record.getMeasurementValue();
@@ -139,9 +138,8 @@ public class AlertGenerator {
                 // Check if oxygen saturation dropped by 5 or more
                 if (saturationValues.size() >= 2) {
 
-                    double previous =
-                            saturationValues.get(
-                                    saturationValues.size() - 2);
+                    double previous = saturationValues.get(
+                            saturationValues.size() - 2);
 
                     if (previous - value >= 5) {
 
@@ -233,9 +231,9 @@ public class AlertGenerator {
      * Checks if values show a strong increasing
      * or decreasing trend.
      *
-     * @param values the list of recorded values
+     * @param values  the list of recorded values
      * @param patient the patient being checked
-     * @param type the measurement type
+     * @param type    the measurement type
      */
     private void checkTrend(
             List<Double> values,
