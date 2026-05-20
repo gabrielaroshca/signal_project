@@ -22,7 +22,8 @@ public class DataReaderTest {
     public void testStartRealTimeReadingUsesReadData()
             throws IOException {
 
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
+        storage.clear();
 
         DataReader reader = new DataReader() {
 

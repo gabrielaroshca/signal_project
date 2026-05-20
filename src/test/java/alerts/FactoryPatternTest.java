@@ -23,7 +23,7 @@ public class FactoryPatternTest {
 
         AlertFactory factory = new BloodPressureAlertFactory();
 
-        Alert alert = factory.createAlert("1", 1000L);
+        Alert alert = factory.createAlert("1", "Blood pressure alert", 1000L);
 
         assertEquals("Blood pressure alert", alert.getCondition());
     }
@@ -36,7 +36,7 @@ public class FactoryPatternTest {
 
         AlertFactory factory = new BloodOxygenAlertFactory();
 
-        Alert alert = factory.createAlert("1", 1000L);
+        Alert alert = factory.createAlert("1", "Low oxygen saturation",  1000L);
 
         assertEquals("Low oxygen saturation", alert.getCondition());
     }
@@ -49,7 +49,7 @@ public class FactoryPatternTest {
 
         AlertFactory factory = new ECGAlertFactory();
 
-        Alert alert = factory.createAlert("1", 1000L);
+        Alert alert = factory.createAlert("1", "ECG abnormal peak detected",  1000L);
 
         assertEquals("ECG abnormal peak detected", alert.getCondition());
     }

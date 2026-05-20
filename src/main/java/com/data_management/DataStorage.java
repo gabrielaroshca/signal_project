@@ -35,7 +35,7 @@ public class DataStorage {
      * This constructor is still public so existing unit tests and project code
      * can create separate storage objects when needed.
      */
-    public DataStorage() {
+    private DataStorage() {
         this.patientMap = new HashMap<>();
     }
 
@@ -107,6 +107,14 @@ public class DataStorage {
      */
     public synchronized List<Patient> getAllPatients() {
         return new ArrayList<>(patientMap.values());
+    }
+
+    /**
+     * Clears all stored patient data.
+     * This is useful for resetting the singleton between tests.
+     */
+    public synchronized void clear() {
+        patientMap.clear();
     }
 
     /**

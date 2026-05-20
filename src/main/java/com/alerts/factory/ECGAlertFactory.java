@@ -2,21 +2,10 @@ package com.alerts.factory;
 
 import com.alerts.Alert;
 
-/**
- * Factory for ECG alerts.
- */
-public class ECGAlertFactory implements AlertFactory {
+public class ECGAlertFactory extends AlertFactory {
 
-    /**
-     * Creates an ECG alert.
-     *
-     * @param patientId the patient ID
-     * @param timestamp the alert timestamp
-     * @return an ECG alert
-     */
     @Override
-    public Alert createAlert(String patientId, long timestamp) {
-
-        return new Alert(patientId, "ECG abnormal peak detected", timestamp);
+    public Alert createAlert(String patientId, String condition, long timestamp) {
+        return new Alert(patientId, condition, timestamp);
     }
 }

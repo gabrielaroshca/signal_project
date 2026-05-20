@@ -32,17 +32,42 @@ import java.util.ArrayList;
  */
 public class HealthDataSimulator {
 
+    /**
+     * Singleton instance of HealthDataSimulator.
+     */
+    private static HealthDataSimulator instance;
+
     private static int patientCount = 50; // Default number of patients
     private static ScheduledExecutorService scheduler;
     private static OutputStrategy outputStrategy = new ConsoleOutputStrategy(); // Default output strategy
     private static final Random random = new Random();
 
-/**
- * Starts the simulator using command line arguments.
- * 
- * @param args command line options for patient count and output type
- * @throws IOException if the file output directory cannot be created
- */
+    /**
+     * Private constructor to enforce singleton pattern.
+     */
+    private HealthDataSimulator() {
+    }
+
+    /**
+     * Returns the single shared simulator instance.
+     *
+     * @return the HealthDataSimulator instance
+     */
+    public static synchronized HealthDataSimulator getInstance() {
+
+        if (instance == null) {
+            instance = new HealthDataSimulator();
+        }
+
+        return instance;
+    }
+
+    /**
+     * Starts the simulator using command line arguments.
+     * 
+     * @param args command line options for patient count and output type
+     * @throws IOException if the file output directory cannot be created
+     */
     public static void main(String[] args) throws IOException {
 
         parseArguments(args);
@@ -183,8 +208,8 @@ public class HealthDataSimulator {
     /**
      * Schedules a recurring task with a small randomized inital delay.
      * 
-     * @param task the task to run repeatedly
-     * @param period the amount of time between executions
+     * @param task     the task to run repeatedly
+     * @param period   the amount of time between executions
      * @param timeUnit the unit of time used for this period
      */
 

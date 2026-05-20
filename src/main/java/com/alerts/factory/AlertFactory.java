@@ -3,19 +3,17 @@ package com.alerts.factory;
 import com.alerts.Alert;
 
 /**
- * Factory interface used to create alerts.
- *
- * Different alert factories implement this interface
- * to generate specific types of alerts.
+ * Abstract factory used to create alerts.
  */
-public interface AlertFactory {
+public abstract class AlertFactory {
 
     /**
-     * Creates an alert.
+     * Creates an alert with a patient ID, condition, and timestamp.
      *
      * @param patientId the patient ID
+     * @param condition the alert condition
      * @param timestamp the alert timestamp
      * @return the created alert
      */
-    Alert createAlert(String patientId, long timestamp);
+    public abstract Alert createAlert(String patientId, String condition, long timestamp);
 }

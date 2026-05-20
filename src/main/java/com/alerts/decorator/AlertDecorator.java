@@ -4,11 +4,8 @@ import com.alerts.Alert;
 
 /**
  * Base decorator class for alerts.
- *
- * This class wraps an Alert object and allows
- * extra information or behavior to be added.
  */
-public class AlertDecorator {
+public class AlertDecorator extends Alert {
 
     protected Alert alert;
 
@@ -18,32 +15,21 @@ public class AlertDecorator {
      * @param alert the alert being decorated
      */
     public AlertDecorator(Alert alert) {
+        super(alert.getPatientId(), alert.getCondition(), alert.getTimestamp());
         this.alert = alert;
     }
 
-    /**
-     * Returns the patient ID from the alert.
-     *
-     * @return the patient ID
-     */
+    @Override
     public String getPatientId() {
         return alert.getPatientId();
     }
 
-    /**
-     * Returns the alert condition.
-     *
-     * @return the alert condition
-     */
+    @Override
     public String getCondition() {
         return alert.getCondition();
     }
 
-    /**
-     * Returns the alert timestamp.
-     *
-     * @return the timestamp
-     */
+    @Override
     public long getTimestamp() {
         return alert.getTimestamp();
     }

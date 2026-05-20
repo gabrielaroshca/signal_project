@@ -23,7 +23,7 @@ public class WebSocketDataClientTest {
     @Test
     public void testProcessValidMessage() throws Exception {
 
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
 
         WebSocketDataClient client = new WebSocketDataClient(new URI("ws://localhost:8080"), storage);
 
@@ -47,7 +47,7 @@ public class WebSocketDataClientTest {
     @Test
     public void testProcessInvalidMessage() throws Exception {
 
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
 
         WebSocketDataClient client = new WebSocketDataClient(new URI("ws://localhost:8080"), storage);
 
@@ -67,7 +67,7 @@ public class WebSocketDataClientTest {
     @Test
     public void testMessageWithMissingFieldsIsSkipped() throws Exception {
 
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
 
         WebSocketDataClient client = new WebSocketDataClient(new URI("ws://localhost:8080"), storage);
 
@@ -87,7 +87,7 @@ public class WebSocketDataClientTest {
     @Test
     public void testWebSocketErrorHandling() throws Exception {
 
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
 
         WebSocketDataClient client = new WebSocketDataClient(new URI("ws://localhost:8080"), storage);
 
@@ -103,7 +103,7 @@ public class WebSocketDataClientTest {
     @Test
     public void testEmptyMessageHandling() throws Exception {
 
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
 
         WebSocketDataClient client = new WebSocketDataClient(new URI("ws://localhost:8080"), storage);
 
@@ -123,7 +123,7 @@ public class WebSocketDataClientTest {
     @Test
     public void testInvalidNumberFormatHandling() throws Exception {
 
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
 
         WebSocketDataClient client = new WebSocketDataClient(new URI("ws://localhost:8080"), storage);
 

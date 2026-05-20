@@ -45,7 +45,8 @@ public class FileDataReaderTest {
         Files.writeString(file, "Patient ID: 1, Timestamp: 1000, Label: ECG, Data: 0.75\n");
 
         // Create storage and reader objects
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
+        storage.clear();
         FileDataReader reader = new FileDataReader(tempDir.toString());
 
         // Read data from the file

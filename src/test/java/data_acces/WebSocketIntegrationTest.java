@@ -27,7 +27,8 @@ public class WebSocketIntegrationTest {
     public void testWebSocketToAlertIntegration()
             throws Exception {
 
-        DataStorage storage = new DataStorage();
+        DataStorage storage = DataStorage.getInstance();
+        storage.clear();
 
         WebSocketDataClient client = new WebSocketDataClient(new URI("ws://localhost:8080"), storage);
 
