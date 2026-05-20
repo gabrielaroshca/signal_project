@@ -1,19 +1,18 @@
-# Generator
+# Patient Identification
 
-The Generator Subsystem creates simulated patient health data for the system. The `PatientDataGenerator` interface is used as a common structure for all generator classes. Different classes generate different types of patient data, such as ECG data, blood pressure, blood oxygen saturation, blood levels, and alert events.
+The Patient Identification subsystem is used to keep track of patients and their health data. Each patient has a unique ID so the system knows which generated data belongs to which patient. This is important because the simulator creates health information for multiple patients at the same time.
 
-The `HealthDataSimulator` class controls the subsystem. It creates generator objects and schedules them to run repeatedly for each patient. Using separate generator classes makes the system easier to organize and maintain because each class has its own responsibility.
+The main classes are `Patient`, `PatientRecord`, and `DataStorage`. `Patient` stores information about a patient, while `PatientRecord` stores a single health measurement with a timestamp. `DataStorage` keeps all patient data organized so it can be accessed later.
 
-The subsystem also uses the `OutputStrategy` interface to send generated data to different outputs. This allows the generators to work without depending on a specific communication method. Overall, the subsystem shows modular design, flexibility, and separation of responsibilities.
+This subsystem helps prevent data from getting mixed up and makes it easier to manage multiple patients in the system.
 
+# Data Access Layer
 
-# Output 
+The Data Access Layer is responsible for receiving and storing incoming data. The `DataListener` interface allows different listener classes, such as `FileDataListener`, `TCPDataListener`, and `WebSocketDataListener`, to receive data from different sources.
 
-The Output sends generated patient data to different destinations. The subsystem uses the `OutputStrategy` interface, which defines a common `output()` method for all output classes.
+When data is received, it goes through the `DataSourceAdapter`, which connects the incoming data to the storage system. `DataParser` helps process the raw data before it is stored in `DataStorage`.
 
-Different implementations provide different ways to send data. `ConsoleOutputStrategy` prints data to the console, `FileOutputStrategy` saves data to files, `TcpOutputStrategy` sends data through TCP connections, and `WebSocketOutputStrategy` broadcasts data to connected WebSocket clients.
-
-The `HealthDataSimulator` class selects which output strategy will be used. Because the simulator works with the interface instead of specific classes, new output methods can be added easily later. This subsystem demonstrates flexibility, modularity, and separation between data generation and communication logic.
+This structure keeps the system organized because each class has a separate responsibility, making the program easier to understand and update.
 
 
 # Data Management 

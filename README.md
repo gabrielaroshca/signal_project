@@ -76,9 +76,12 @@ The UML files are located in the `uml_models/` folder.
 
 ## Included Diagrams
 
-- Generator
-- Output
-- Data 
-- Alert 
+- [Patient Identification](uml_models/identification.png)
+
+- [Data Access Layer](uml_models/data_access.png)
+
+- [Data Management](uml_models/data_management.png)
+
+- [Alerts](uml_models/alerts.png)
 
 The diagrams show how the classes and subsystems in the project are connected and organized.
