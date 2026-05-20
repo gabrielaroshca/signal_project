@@ -222,4 +222,65 @@ public class AlertGeneratorTest {
         assertEquals(1, alertManager.getAlerts().size());
         assertEquals("Manual alert triggered", alertManager.getAlerts().get(0).getCondition());
     }
+
+    @Test
+    public void testCriticalHighDiastolicPressureTriggersAlert() {
+        DataStorage storage = new DataStorage();
+        AlertManager alertManager = new AlertManager();
+        AlertGenerator generator = new AlertGenerator(storage, alertManager);
+
+        Patient patient = new Patient(1);
+        patient.addRecord(125.0, "DiastolicPressure", 1000L);
+
+        generator.evaluateData(patient);
+
+        assertEquals(1, alertManager.getAlerts().size());
+        assertEquals("Critical high diastolic pressure", alertManager.getAlerts().get(0).getCondition());
+    }
+
+    @Test
+    public void testCriticalLowDiastolicPressureTriggersAlert() {
+        DataStorage storage = new DataStorage();
+        AlertManager alertManager = new AlertManager();
+        AlertGenerator generator = new AlertGenerator(storage, alertManager);
+
+        Patient patient = new Patient(1);
+        patient.addRecord(55.0, "DiastolicPressure", 1000L);
+
+        generator.evaluateData(patient);
+
+        assertEquals(1, alertManager.getAlerts().size());
+        assertEquals("Critical low diastolic pressure", alertManager.getAlerts().get(0).getCondition());
+    }
+
+    @Test
+    public void testBorderlineSystolicTrendDoesNotTriggerAlert() {
+        DataStorage storage = new DataStorage();
+        AlertManager alertManager = new AlertManager();
+        AlertGenerator generator = new AlertGenerator(storage, alertManager);
+
+        Patient patient = new Patient(1);
+        patient.addRecord(120.0, "SystolicPressure", 1000L);
+        patient.addRecord(130.0, "SystolicPressure", 2000L);
+        patient.addRecord(140.0, "SystolicPressure", 3000L);
+
+        generator.evaluateData(patient);
+
+        assertEquals(0, alertManager.getAlerts().size());
+    }
+
+    @Test
+    public void testRapidSaturationDropOutsideTenMinutesDoesNotTriggerAlert() {
+        DataStorage storage = new DataStorage();
+        AlertManager alertManager = new AlertManager();
+        AlertGenerator generator = new AlertGenerator(storage, alertManager);
+
+        Patient patient = new Patient(1);
+        patient.addRecord(98.0, "Saturation", 1000L);
+        patient.addRecord(92.0, "Saturation", 700001L);
+
+        generator.evaluateData(patient);
+
+        assertEquals(0, alertManager.getAlerts().size());
+    }
 }

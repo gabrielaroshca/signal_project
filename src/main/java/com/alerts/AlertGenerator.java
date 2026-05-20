@@ -137,16 +137,27 @@ public class AlertGenerator {
 
                 // Check if oxygen saturation dropped by 5 or more
                 if (saturationValues.size() >= 2) {
+                    PatientRecord previousRecord = null;
 
-                    double previous = saturationValues.get(
-                            saturationValues.size() - 2);
+                    for (int i = patient.getRecords(0, Long.MAX_VALUE).indexOf(record) - 1; i >= 0; i--) {
+                        PatientRecord possiblePrevious = patient.getRecords(0, Long.MAX_VALUE).get(i);
 
-                    if (previous - value >= 5) {
+                        if (possiblePrevious.getRecordType().equals("Saturation")) {
+                            previousRecord = possiblePrevious;
+                            break;
+                        }
+                    }
 
-                        triggerAlert(new Alert(
-                                String.valueOf(patient.getPatientId()),
-                                "Rapid oxygen saturation drop detected",
-                                record.getTimestamp()));
+                    if (previousRecord != null) {
+                        double previous = previousRecord.getMeasurementValue();
+                        long timeDifference = record.getTimestamp() - previousRecord.getTimestamp();
+
+                        if (timeDifference <= 600000 && previous - value >= 5) {
+                            triggerAlert(new Alert(
+                                    String.valueOf(patient.getPatientId()),
+                                    "Rapid oxygen saturation drop detected",
+                                    record.getTimestamp()));
+                        }
                     }
                 }
             }
@@ -163,8 +174,11 @@ public class AlertGenerator {
                  */
                 if (ecgValues.size() > 1) {
 
-                    double average = calculateAverage(ecgValues);
+                    int fromIndex = Math.max(0, ecgValues.size() - 10);
+                    List<Double> recentEcgValues = ecgValues.subList(fromIndex, ecgValues.size());
 
+                    double average = calculateAverage(recentEcgValues);
+                    
                     if (value > average * 1.5) {
 
                         triggerAlert(new Alert(
